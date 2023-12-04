@@ -20,8 +20,11 @@
 #define PROMPT "$ "
 #define MAX_TOKENS 1024
 #define BUFFER_SIZE 1024
+#define MAX_LINE_LENGTH 80
 
 void simple_shell();
 int main(void);
+void read_command(char *command);
+int execute_command(char *command);
 
 #endif
