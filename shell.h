@@ -22,5 +22,6 @@
 #define BUFFER_SIZE 1024
 
 void simple_shell()
+int main(void);
 
 #endif
