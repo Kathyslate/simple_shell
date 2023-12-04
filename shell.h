@@ -15,13 +15,16 @@
 #include <stdarg.h>
 #include <ctype.h>
 
+#define MAX_LINE_LENGTH 80
 #define PATH_MAX_LENGTH 4096
 #define PATH_SEPARATOR ":"
 #define PROMPT "$ "
 #define MAX_TOKENS 1024
 #define BUFFER_SIZE 1024
 
-void simple_shell()
+void simple_shell(void);
 int main(void);
+void read_command(char *command);
+int execute_command(char *command);
 
 #endif
