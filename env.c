@@ -1,18 +1,22 @@
 /*
- * File - arguments.c
+ * File - env.c
  * Authors - Green Ebisine and Mercy Oyetunde
  *
  * Description - A command line interpreter that
- * accepts command from the standard input
- * and handles command lines with arguments
-*/
+ * accepts command from the standard input,handles arguments,
+ * handles PATH and doesnt fork incorrect command
+ * that has env built-in
+ */
+
 #include "shell.h"
+
 /**
  * is_executable - reads command from standard input
  * @filename: command arguments
  *
  * Return: always returns 0
  */
+
 int is_executable(char *filename)
 {
 	if (access(filename, X_OK) == 0)
@@ -21,6 +25,13 @@ int is_executable(char *filename)
 	}
 	return (0);
 }
+
+/**
+ * read_command - reads command from standard input
+ * @command: command arguments
+ *
+ * Return: always returns 0
+ */
 
 void read_command(char *command)
 {
@@ -33,6 +44,13 @@ void read_command(char *command)
 	}
 	command[i] = '\0';
 }
+
+/**
+ * find_command - finds command from standard input
+ * @command: command arguments
+ *
+ * Return: always returns 0
+ */
 
 void find_command(char *command)
 {
@@ -71,12 +89,14 @@ void find_command(char *command)
 
 	printf("The command '%s' does not exist.\n", command);
 }
+
 /**
  * execute_command - executes command from standard input
  * @command: command arguments
  *
  * Return: always returns 0
-*/
+ */
+
 int execute_command(char *command)
 {
 	pid_t pid;
@@ -120,16 +140,20 @@ int execute_command(char *command)
 
 	return (0);
 }
+
 /**
  * main - Entry point
- * @argc: Arguments counts
- * @argv: Arguments variable string
+ * @argc: argument count
+ * @argv: argument vector
  *
- * Return: always return 0
+ * Return: always returns 0
  */
+
 int main(int argc, char *argv[])
 {
 	char command[MAX_LINE_LENGTH];
+	char **env_var;
+
 
 	while (1)
 	{
@@ -147,9 +171,14 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	for (env_var = environ; *env_var != NULL; env_var++)
+	{
+		printf("%s\n", *env_var);
+	}
+
 	if (argc < 2)
 	{
-		printf("Exiting...%s\n", argv[0]);
+		printf("Usage: %s <command>\n", argv[0]);
 		exit(1);
 	}
 

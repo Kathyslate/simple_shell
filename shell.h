@@ -23,12 +23,11 @@
 #define BUFFER_SIZE 1024
 #define MAX_LINE_LENGTH 80
 
-void env();
 void simple_shell(void);
 void read_command(char *command);
 void find_command(char *command);
 int execute_command(char *command);
 int is_executable(char *filename);
 int main(int argc, char *argv[]);
-
+char command[MAX_LINE_LENGTH];
 #endif
