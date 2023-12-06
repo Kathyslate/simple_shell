@@ -17,6 +17,6 @@ int main(void)
 
 	sum = integer1 + integer2;
 
-	printf("%d + %d = %d", integer1, integer2, sum);
+	printf("%d + %d = %d\n", integer1, integer2, sum);
 	return (0);
 }
