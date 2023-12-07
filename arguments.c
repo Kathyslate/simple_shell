@@ -80,7 +80,7 @@ int execute_command(char *command)
  * main - Entry point
  *
  * Return: always returns 0
-*/
+ */
 int main(void)
 {
 	char command[MAX_LINE_LENGTH];
