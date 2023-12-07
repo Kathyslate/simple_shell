@@ -27,7 +27,7 @@ int main(void)
 	}
 	if (read == -1)
 	{
-		printf("EOF encountered, exiting...\n");
+		printf("\nEOF encountered, exiting...\n");
 	}
 	if (ferror(stdin))
 	{
