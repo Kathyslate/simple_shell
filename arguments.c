@@ -12,7 +12,7 @@
  * Description - A command line interpreter that
  * accepts command from the standard input
  * and handles command lines with arguments
-*/
+ */
 
 void read_command(char *command)
 {
@@ -31,7 +31,7 @@ void read_command(char *command)
  * @command: command arguments
  *
  * Return: always returns 0
-*/
+ */
 int execute_command(char *command)
 {
 	pid_t pid;
@@ -78,11 +78,15 @@ int execute_command(char *command)
 
 /**
  * main - Entry point
- *
- * Return: always returns 0
-*/
-int main(void)
+ * @argc: argument count
+ * @argv: arguments
+ * Return: always return 0
+ */
+
+int main(int argc, char *argv[])
 {
+	(void)argc;
+	(void)argv;
 	char command[MAX_LINE_LENGTH];
 
 	while (1)
