@@ -78,11 +78,14 @@ int execute_command(char *command)
 
 /**
  * main - Entry point
- *
- * Return: always returns 0
+ * @argc: argument count
+ * @argv: arguments
+ * Return: always return 0
  */
-int main(void)
+int main(int argc, char *argv[])
 {
+	(void)argc;
+	(void)argv;
 	char command[MAX_LINE_LENGTH];
 
 	while (1)

@@ -31,7 +31,9 @@ void simple_shell(void)
 			input[strlen(input) - 1] = '\0';
 		}
 
-		if ((pid = fork()) == 0)
+		pid = fork();
+
+		if (pid == 0)
 		{
 			execlp(input, input, (char *)NULL);
 			perror("Error executing command");
@@ -45,10 +47,15 @@ void simple_shell(void)
 }
 /**
  * main - Entry point
+ * @argc: argument count
+ * @argv: arguments
  * Return: always return 0
  */
-int main(void)
+
+int main(int argc, char *argv[])
 {
+	(void)argc;
+	(void)argv;
 	simple_shell();
 	return (0);
 }
