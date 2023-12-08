@@ -26,8 +26,8 @@
 ssize_t _readline(char **lineptr, size_t *n, FILE *stream);
 void simple_shell(void);
 void read_command(char *command);
-int execute_command(char *command);
 void find_command(char *command);
+int execute_command(char *command);
 int is_executable(char *filename);
 int main(int argc, char *argv[]);
 char command[MAX_LINE_LENGTH];

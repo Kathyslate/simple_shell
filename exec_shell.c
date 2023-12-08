@@ -51,6 +51,7 @@ void simple_shell(void)
  * @argv: arguments
  * Return: always return 0
  */
+
 int main(int argc, char *argv[])
 {
 	(void)argc;
