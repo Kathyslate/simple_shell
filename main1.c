@@ -31,6 +31,10 @@ int main(int argc, char *argv[])
 			break;
 		}
 	}
+	if (feof(stdin))
+	{
+		exit(0);
+	}
 	for (env_var = environ; *env_var != NULL; env_var++)
 	{
 		printf("%s\n", *env_var);
