@@ -52,7 +52,7 @@ void simple_shell(void)
  * Return: always return 0
  */
 
-int main(int argc, char *argv[])
+int exec_shell(int argc, char *argv[])
 {
 	(void)argc;
 	(void)argv;

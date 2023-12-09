@@ -1,31 +1,42 @@
-/*
- * File - test.c
- * Authors - Green Ebisine and Mercy Oyetunde
- *
- * Description - handle arguments for the built-in exit
- * Usage: exit status, where status is an integer used to exit the shell
- */
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "shell.h"
 
-#define MAX_NUM_ARGUMENTS 100
-#define MAX_COMMAND_LENGTH 1000
-
 /**
- * execute_command - executes command from standard input
- * @argv: argument vector
+ * read_command - reads command from standard input
+ * @command: command arguments
+ *
  * Return: always returns 0
- */
+ *
+ * File - arguments.c
+ * Authors - Green Ebisine and Mercy Oyetunde
+ *
+ * Description - A command line interpreter that
+ * accepts command from the standard input
+ * and handles command lines with arguments
+ 
 
-int execute_command(char **argv)
+extern void read_command(char *command)
+{
+	char c;
+	int i = 0;
+
+	while ((c = getchar()) != '\n' && c != EOF)
+	{
+		command[i++] = c;
+	}
+	command[i] = '\0';
+}
+
+
+ * execute_command - executes command from standard input
+ * @command: command arguments
+ *
+ * Return: always returns 0
+ 
+
+extern int execute_command(char *command)
 {
 	pid_t pid;
-	int status = 0;
+	int status;
 
 	pid = fork();
 
@@ -34,28 +45,38 @@ int execute_command(char **argv)
 		perror("Fork failed");
 		return (1);
 	}
-	else if (pid == 0)
+
+	if (pid == 0)
 	{
-		if (execvp(argv[0], argv) == -1)
+		char *args[MAX_LINE_LENGTH / 2 + 1];
+		char *token = strtok(command, " ");
+		int i = 0;
+
+		while (token != NULL)
 		{
-			perror("Command execution failed");
+			args[i++] = token;
+			token = strtok(NULL, " ");
+		}
+		args[i] = NULL;
+
+		if (execvp(args[0], args) == -1)
+		{
+			perror("Error executing command");
 			exit(1);
 		}
 	}
 	else
 	{
-		while (waitpid(pid, &status, 0) == -1)
+		if (waitpid(pid, &status, 0) == -1)
 		{
-			if (errno != EINTR)
-			{
-				perror("Waitpid failed");
-				return (1);
-			}
+			perror("Error waiting for child process");
+			return (1);
 		}
-		return (WEXITSTATUS(status));
 	}
+
 	return (0);
 }
+*/
 
 /**
  * main - Entry point
@@ -64,44 +85,34 @@ int execute_command(char **argv)
  * Return: always return 0
  */
 
-int main(int argc, char *argv[])
+int exiting()
 {
-	(void)argc;
-	(void)argv;
-	char command[MAX_COMMAND_LENGTH];
-	char *arguments[MAX_NUM_ARGUMENTS];
-	int num_arguments = 0;
-	char *token;
+	char command[MAX_LINE_LENGTH];
 
 
 	while (1)
 	{
-		printf("megnix: ");
+		printf("megnix> ");
 		fflush(stdout);
+		read_command(command);
 
-		if (fgets(command, MAX_COMMAND_LENGTH, stdin) == NULL)
+		if (strncmp(command, "exit", 4) == 0)
+		{
+
+			int status_code;
+
+			if (sscanf(command, "exit %d", &status_code) == 1)
+			{
+				exit(status_code);
+			} else
+			{
+				exit(0);
+			}
+		}
+		if (execute_command(command) != 0)
 		{
 			break;
 		}
-
-		token = strtok(command, " \t\r\n");
-		while (token != NULL)
-		{
-			arguments[num_arguments++] = token;
-			token = strtok(NULL, " \t\r\n");
-		}
-		arguments[num_arguments] = NULL;
-
-
-		int status = execute_command(arguments);
-
-		if (status == 1)
-		{
-			perror("Error executing command");
-		}
-
-		num_arguments = 0;
 	}
-
 	return (0);
 }

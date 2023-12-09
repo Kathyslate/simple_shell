@@ -14,7 +14,7 @@
  * and handles command lines with arguments
  */
 
-void read_command(char *command)
+extern void read_command(char *command)
 {
 	char c;
 	int i = 0;
@@ -32,7 +32,9 @@ void read_command(char *command)
  *
  * Return: always returns 0
  */
-int execute_command(char *command)
+ 
+
+extern int execute_command(char *command)
 {
 	pid_t pid;
 	int status;
@@ -76,6 +78,7 @@ int execute_command(char *command)
 	return (0);
 }
 
+
 /**
  * main - Entry point
  * @argc: argument count
@@ -83,11 +86,12 @@ int execute_command(char *command)
  * Return: always return 0
  */
 
-int main(int argc, char *argv[])
+int arguments(int argc, char *argv[])
 {
+	char command[MAX_LINE_LENGTH];
+
 	(void)argc;
 	(void)argv;
-	char command[MAX_LINE_LENGTH];
 
 	while (1)
 	{

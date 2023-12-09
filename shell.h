@@ -2,6 +2,7 @@
 #define _SHELL_H_
 #define _GNU_SOURCE
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -23,12 +24,19 @@
 #define BUFFER_SIZE 1024
 #define MAX_LINE_LENGTH 80
 
-ssize_t _readline(char **lineptr, size_t *n, FILE *stream);
-void simple_shell(void);
-void read_command(char *command);
-void find_command(char *command);
-int execute_command(char *command);
-int is_executable(char *filename);
-int main(int argc, char *argv[]);
+extern void simple_shell(void);
+extern void read_command(char *command);
+extern void find_command(char *command);
+extern int execute_command(char *command);
+extern int is_executable(char *filename);
+extern int main();
+extern int exiting();
+extern int path(int argc, char *argv[]);
+extern int arguments(int argc, char *argv[]);
+extern int env(int argc, char *argv[]);
+extern int exec_shell(int argc, char *argv[]);
+extern int betty_checks();
+extern int own_getline();
+extern int main(int argc, char *argv[]);
 char command[MAX_LINE_LENGTH];
 #endif

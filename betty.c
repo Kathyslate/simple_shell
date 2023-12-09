@@ -8,7 +8,7 @@
  * Return: Always 0 (Success)
  */
 
-int main(void)
+int betty_checks()
 {
 	int integer1, integer2, sum;
 

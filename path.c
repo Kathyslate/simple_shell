@@ -30,7 +30,7 @@ int is_executable(char *filename)
  * @command: command arguments
  *
  * Return: always returns 0
-*/
+
 
 void read_command(char *command)
 {
@@ -43,6 +43,7 @@ void read_command(char *command)
 	}
 	command[i] = '\0';
 }
+*/
 
 /**
  * find_command - finds command from standard input
@@ -94,7 +95,7 @@ void find_command(char *command)
  * @command: command arguments
  *
  * Return: always returns 0
-*/
+
 
 int execute_command(char *command)
 {
@@ -139,6 +140,7 @@ int execute_command(char *command)
 
 	return (0);
 }
+*/
 
 /**
  * main - Entry point
@@ -148,7 +150,7 @@ int execute_command(char *command)
  * Return: always returns 0
 */
 
-int main(int argc, char *argv[])
+int path(int argc, char *argv[])
 {
 	char command[MAX_LINE_LENGTH];
 

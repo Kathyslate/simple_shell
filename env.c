@@ -15,9 +15,9 @@
  * @filename: command arguments
  *
  * Return: always returns 0
- */
+ 
 
-int is_executable(char *filename)
+extern int is_executable(char *filename)
 {
 	if (access(filename, X_OK) == 0)
 	{
@@ -26,14 +26,14 @@ int is_executable(char *filename)
 	return (0);
 }
 
-/**
+
  * read_command - reads command from standard input
  * @command: command arguments
  *
  * Return: always returns 0
- */
+ 
 
-void read_command(char *command)
+extern void read_command(char *command)
 {
 	char c;
 	int i = 0;
@@ -45,14 +45,14 @@ void read_command(char *command)
 	command[i] = '\0';
 }
 
-/**
+
  * find_command - finds command from standard input
  * @command: command arguments
  *
  * Return: always returns 0
- */
 
-void find_command(char *command)
+
+extern void find_command(char *command)
 {
 	char *path;
 	char *path_ptr;
@@ -90,14 +90,14 @@ void find_command(char *command)
 	printf("The command '%s' does not exist.\n", command);
 }
 
-/**
+
  * execute_command - executes command from standard input
  * @command: command arguments
  *
  * Return: always returns 0
- */
+ 
 
-int execute_command(char *command)
+extern int execute_command(char *command)
 {
 	pid_t pid;
 	int status;
@@ -141,7 +141,7 @@ int execute_command(char *command)
 	return (0);
 }
 
-/**
+
  * main - Entry point
  * @argc: argument count
  * @argv: argument vector
@@ -149,10 +149,11 @@ int execute_command(char *command)
  * Return: always returns 0
  */
 
-int main(int argc, char *argv[])
+int env(int argc, char *argv[])
 {
 	char command[MAX_LINE_LENGTH];
 	char **env_var;
+	extern char **environ;
 
 
 	while (1)
@@ -170,6 +171,7 @@ int main(int argc, char *argv[])
 			break;
 		}
 	}
+
 
 	for (env_var = environ; *env_var != NULL; env_var++)
 	{

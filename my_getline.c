@@ -13,7 +13,8 @@
  * accepts string from the standard input
  */
 
-ssize_t my_getline(char **lineptr, size_t *n, FILE *stream) {
+ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
+{
 	char *newline;
 	ssize_t linecapacity;
 
