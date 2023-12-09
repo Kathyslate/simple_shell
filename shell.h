@@ -30,7 +30,7 @@ extern void find_command(char *command);
 extern int execute_command(char *command);
 extern int is_executable(char *filename);
 extern int main();
-extern int exiting();
+extern void exiting();
 extern int path(int argc, char *argv[]);
 extern int arguments(int argc, char *argv[]);
 extern int env(int argc, char *argv[]);

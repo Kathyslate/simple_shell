@@ -14,7 +14,7 @@
  * and handles command lines with arguments
  */
 
-extern void read_command(char *command)
+void read_command(char *command)
 {
 	char c;
 	int i = 0;
@@ -31,7 +31,7 @@ extern void read_command(char *command)
  * @command: command arguments
  *
  * Return: always returns 0
- */
+ 
  
 
 extern int execute_command(char *command)
@@ -77,7 +77,7 @@ extern int execute_command(char *command)
 
 	return (0);
 }
-
+*/
 
 /**
  * main - Entry point
