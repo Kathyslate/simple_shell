@@ -2,45 +2,84 @@
 
 #define MAXLINE 1024
 
+/**
+ * exit_shell - exits the shell
+ * @status_code: status of shell
+ *
+ */
+
+void exit_shell(int status_code)
+{
+	exit(status_code);
+}
+
+/**
+ * execute_exit_command - executes command from standard input
+ * @command: command arguments
+ *
+ * Return: always returns 0
+ */
+
+void execute_exit_command(char *command)
+{
+	int status_code;
+
+	if (sscanf(command, "exit %d", &status_code) == 1)
+	{
+		exit_shell(status_code);
+	}
+	else
+	{
+		exit_shell(0);
+	}
+}
+
+
+/**
+ * execute_command - executes command from standard input
+ * @command: command arguments
+ *
+ * Return: always returns 0
+ */
+
 int execute_command(char *command)
 {
-	char *argv[MAXLINE / 2 + 1];
+	char *argv[MAX_LINE_LENGTH / 2 + 1];
+	char *token = strtok(command, " ");
 	int status;
-	int i = 1;
+	int i = 0;
 	pid_t pid;
 
-	if (strncmp(command, "exit", 4) == 0) {
-		int status_code;
+	pid = fork();
 
-		if (sscanf(command, "exit %d", &status_code) == 1) {
-			exit(status_code);
-		} else {
-			exit(0);
-		}
+	if (pid == -1)
+	{
+		perror("Fork failed");
+		return (1);
 	}
-
-	if ((pid = fork()) < 0) {
-		perror("fork");
-		exit(1);
-	}
-
-	if (pid == 0) {
-		argv[0] = strtok(command, " \t\n");
-		while ((argv[i++] = strtok(NULL, " \t\n"))) {
-			continue;
+	if (pid == 0)
+	{
+		while (token != NULL)
+		{
+			argv[i++] = token;
+			token = strtok(NULL, " ");
 		}
+		argv[i] = NULL;
 
-		if (execvp(argv[0], argv) < 0) {
-			perror("exec");
+		if (execvp(argv[0], argv) == -1)
+		{
+			perror("Error executing command");
 			exit(1);
 		}
 	}
-
-	if (waitpid(pid, &status, 0) < 0) {
-		perror("waitpid");
-		exit(1);
+	else
+	{
+		if (waitpid(pid, &status, 0) == -1)
+		{
+			perror("Error waiting for child process");
+			return (1);
+		}
 	}
 
-	return (status);
+	return (0);
 }
-

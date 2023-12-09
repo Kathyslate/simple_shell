@@ -46,7 +46,7 @@ void simple_shell(void)
 	}
 }
 /**
- * main - Entry point
+ * exec_shell- Executes the shell
  * @argc: argument count
  * @argv: arguments
  * Return: always return 0

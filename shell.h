@@ -24,11 +24,13 @@
 #define BUFFER_SIZE 1024
 #define MAX_LINE_LENGTH 80
 
-extern void simple_shell(void);
-extern void read_command(char *command);
-extern void find_command(char *command);
-extern int execute_command(char *command);
-extern int is_executable(char *filename);
+void simple_shell(void);
+void read_command(char *command);
+void find_command(char *command);
+void execute_exit_command(char *command);
+void exit_shell(int status_code);
+int execute_command(char *command);
+int is_executable(char *filename);
 extern void exiting();
 extern int path(int argc, char *argv[]);
 extern int arguments(int argc, char *argv[]);
@@ -37,5 +39,6 @@ extern int exec_shell(int argc, char *argv[]);
 extern int add(int a, int b);
 extern int own_getline();
 extern int main(int argc, char *argv[]);
+extern char **environ;
 char command[MAX_LINE_LENGTH];
 #endif

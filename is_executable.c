@@ -19,9 +19,9 @@
 
 int is_executable(char *filename)
 {
-        if (access(filename, X_OK) == 0)
-        {
-                return (1);
-        }
-        return (0);
+	if (access(filename, X_OK) == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
