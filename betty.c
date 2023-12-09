@@ -1,22 +1,16 @@
 #include <stdio.h>
 
 /**
- * main - Entry point
+ * add - adds 2 integers
+ * @a: first integer
+ * @b: second integer
  *
  * Description: 'a program that accepts two integers and sum them up'
  *
  * Return: Always 0 (Success)
  */
 
-int betty_checks()
+int add(int a, int b)
 {
-	int integer1, integer2, sum;
-
-	printf("Enter two integers to be added: ");
-	scanf("%d %d", &integer1, &integer2);
-
-	sum = integer1 + integer2;
-
-	printf("%d + %d = %d\n", integer1, integer2, sum);
-	return (0);
+	return (a + b);
 }

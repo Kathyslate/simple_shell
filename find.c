@@ -14,7 +14,7 @@
  * @filename: command arguments
  *
  * Return: always returns 0
- */
+
 
 int is_executable(char *filename)
 {
@@ -24,6 +24,7 @@ int is_executable(char *filename)
 	}
 	return (0);
 }
+*/
 
 /**
  * read_command - reads command from standard input
@@ -148,7 +149,6 @@ int execute_command(char *command)
  * @argv: argument vector
  *
  * Return: always returns 0
-*/
 
 int path(int argc, char *argv[])
 {
@@ -179,3 +179,5 @@ int path(int argc, char *argv[])
 	find_command(argv[1]);
 	return (0);
 }
+
+*/

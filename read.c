@@ -77,14 +77,13 @@ extern int execute_command(char *command)
 
 	return (0);
 }
-*/
 
-/**
+
  * main - Entry point
  * @argc: argument count
  * @argv: arguments
  * Return: always return 0
- */
+
 
 int arguments(int argc, char *argv[])
 {
@@ -110,3 +109,4 @@ int arguments(int argc, char *argv[])
 	}
 	return (0);
 }
+*/

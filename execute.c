@@ -9,15 +9,15 @@ int execute_command(char *command)
 	int i = 1;
 	pid_t pid;
 
-       	if (strncmp(command, "exit", 4) == 0) {
-	 int status_code;
+	if (strncmp(command, "exit", 4) == 0) {
+		int status_code;
 
-	 if (sscanf(command, "exit %d", &status_code) == 1) {
-	 exit(status_code);
-	 } else {
-	 exit(0);
-	 }
-	 }
+		if (sscanf(command, "exit %d", &status_code) == 1) {
+			exit(status_code);
+		} else {
+			exit(0);
+		}
+	}
 
 	if ((pid = fork()) < 0) {
 		perror("fork");
@@ -26,7 +26,6 @@ int execute_command(char *command)
 
 	if (pid == 0) {
 		argv[0] = strtok(command, " \t\n");
-
 		while ((argv[i++] = strtok(NULL, " \t\n"))) {
 			continue;
 		}
@@ -43,24 +42,5 @@ int execute_command(char *command)
 	}
 
 	return (status);
-}
-
-void exiting()
-{
-	char command[MAXLINE];
-
-	while (1)
-	{
-		printf("megnix> ");
-		fflush(stdout);
-		if (fgets(command, MAXLINE, stdin) == NULL)
-		{
-			exit(0);
-		}
-		if (execute_command(command) != 0)
-		{
-			break;
-		}
-	}
 }
 

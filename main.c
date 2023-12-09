@@ -1,43 +1,56 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "my_getline.h"
 
-/**
-  int main() {
-  FILE *file = fopen("betty.c", "r");
-  if (file == NULL) {
-  perror("fopen");
-  return 1;
-  }
+#include "shell.h"
 
-  char *line = NULL;
-  size_t n = 0;
-  ssize_t line_length;
-
-  while ((line_length = my_getline(&line, &n, file)) != -1) {
-  printf("%s", line);
-  }
-
-  free(line);
-  fclose(file);
-
-  return 0;
-  }
-  */
-
-int own_getline()
+int main(int argc, char *argv[])
 {
-	char *lineptr = NULL;
-	size_t n = 0;
-	ssize_t linecapacity;
+	char command[MAX_LINE_LENGTH];
+	char **env_var;
+	extern char **environ;
 
-	while ((linecapacity = my_getline(&lineptr, &n, stdin)) != -1)
+
+	while (1)
 	{
-		printf("linecapacity: %lu, line: %s", (unsigned long) linecapacity, lineptr);
+		printf("megnix> ");
+		fflush(stdout);
+		read_command(command);
 
+		if (strcmp(command, "exit") == 0)
+		{
+			break;
+		}
+		if (execute_command(command) != 0)
+		{
+			break;
+		}
+		if (strncmp(command, "add", 3) == 0)
+		{
+			int num1, num2, sum;
+
+			if (sscanf(command, "add %d %d", &num1, &num2) == 2)
+			{
+				sum = add(num1, num2);
+				printf("Result: %d\n", sum);
+			} else
+			{
+				printf("Error: Invalid add command\n");
+			}
+		}
+
+
+		for (env_var = environ; *env_var != NULL; env_var++)
+		{
+			printf("%s\n", *env_var);
+		}
+
+		if (argc < 2)
+		{
+			printf("Usage: %s <command>\n", argv[0]);
+			exit(1);
+		}
+
+		find_command(argv[1]);
+		return (0);
 	}
-
-	free(lineptr);
-	return 0;
+	return (0);
 }
-
