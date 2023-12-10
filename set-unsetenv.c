@@ -1,64 +1,104 @@
+#include <stdlib.h>
+#include <string.h>
 #include "shell.h"
-/**
- * split_command -  Function to split the command into words
- * @command: commands
- * @argc: argument count
- *
- * Return: argv
- */
-
-char **split_command(char *command, int *argc)
-{
-	char **argv = malloc(100 * sizeof(char *));
-	char *token = strtok(command, " ");
-	*argc = 0;
-
-	while (token != NULL)
-	{
-		argv[*argc] = token;
-		(*argc)++;
-		token = strtok(NULL, " ");
-	}
-
-	return (argv);
-}
 
 /**
- * handle_setenv - handles environment inbuilt
- * @tokens: takes in token
+ * setenv_builtin - handles environment inbuilt
+ * @argc: takes in name
+ * @argv: values in
  *
  * Return: always returns 0
  */
-void handle_setenv(char **tokens)
+
+int setenv_builtin(int argc, char *argv[])
 {
-	if (tokens[1] == NULL || tokens[2] == NULL)
+	if (argc != 3)
 	{
-		fprintf(stderr, "setenv: not enough arguments\n");
-		return;
+		fprintf(stderr, "Usage: %s VARIABLE VALUE\n", argv[0]);
+		return (1);
 	}
-	if (setenv(tokens[1], tokens[2], 1) != 0)
+
+	if (setenv(argv[1], argv[2], 1) != 0)
 	{
 		perror("setenv");
+		return (1);
 	}
+
+	return (0);
 }
 
 /**
- * handle_unsetenv - handles environment inbuilt
- * @tokens: takes in token
+ * unsetenv_builtin - handles environment inbuilt
+ * @argc: takes in name
+ * @argv: argument vector
  *
  * Return: always returns 0
  */
 
-void handle_unsetenv(char **tokens)
+int unsetenv_builtin(int argc, char *argv[])
 {
-	if (tokens[1] == NULL)
+	if (argc != 2)
 	{
-		fprintf(stderr, "unsetenv: not enough arguments\n");
-		return;
+		fprintf(stderr, "Usage: %s VARIABLE\n", argv[0]);
+		return (1);
 	}
 
-	if (unsetenv(tokens[1]) != 0)
+	if (unsetenv(argv[1]) != 0)
 	{
 		perror("unsetenv");
+		return (1);
 	}
+
+	return (0);
+}
+
+/**
+ * cd- change directory
+ * @argc: new directory
+ * @argv: argument vector
+ *
+ * Return: always returns 0
+ */
+
+int cd(int argc, char *argv[])
+{
+	char *directory = argc == 2 ? argv[1] : getenv("HOME");
+
+	if (argc > 2)
+	{
+		fprintf(stderr, "Usage: %s [DIRECTORY]\n", argv[0]);
+		return (1);
+	}
+	if (directory == NULL)
+	{
+		fprintf(stderr, "No home directory set\n");
+		return (1);
+	}
+	if (strcmp(directory, "-") == 0)
+	{
+		char *prev_directory = getcwd(NULL, 0);
+
+		if (prev_directory == NULL)
+		{
+			perror("getcwd");
+			return (1);
+		}
+		if (chdir(prev_directory) != 0)
+		{
+			perror("chdir");
+			free(prev_directory);
+			return (1);
+		}
+
+		free(prev_directory);
+	} else
+	{
+		if (chdir(directory) != 0)
+		{
+			perror("chdir");
+			return (1);
+		}
+	}
+
+	return (0);
 }

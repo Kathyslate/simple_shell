@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * main - Entry point
+ * parse - Entry point
  * @argc: argument count
  * @argv: arguments
  * Return: always return 0
  */
 
-int main(int argc, char *argv[])
+int parse(int argc, char *argv[])
 {
 	char command[MAX_LINE_LENGTH];
 	char **env_var;
