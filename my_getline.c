@@ -1,45 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "my_getline.h"
+#include <errno.h>
+#include <string.h>
 
 /**
- * my_getline - our own getline function
- * Return - always returns 0
+ * my_getline - Read a line from the user into a buffer.
  *
- * File - my_getline.c
- * Authors - Green Ebisine and Mercy Oyetunde
- *
- * Description - A command line interpreter that
- * accepts string from the standard input
+ * @buffer: The buffer to store the read line in.
+ * @max_length: The maximum number of characters to read.
+ * @Return {String} the line read, or an empty string if an error occurred
+ */
+int my_getline(char buffer[], int max_length)
+{
+	int count = 0;
+	int c;
+
+	printf("Please enter a line: ");
+
+	while ((c = getchar()) != '\n' && c != EOF && count < max_length - 1)
+	{
+		buffer[count++] = c;
+	}
+
+	buffer[count] = '\0';
+
+	return ((c == EOF && count == 0) ? -1 : count);
+}
+
+/**
+ * main - Entry point
+ * Return: always return 0
  */
 
-ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
+int main(void)
 {
-	char *newline;
-	ssize_t linecapacity;
+	char line[1000];
+	int read_length = 0;
 
-	size_t buffer_size = 1024;
-
-	if (*lineptr == NULL) {
-		*n = buffer_size;
-		*lineptr = malloc(*n * sizeof(char));
-		if (*lineptr == NULL) {
-			return -1;
-		}
+	while ((read_length = my_getline(line, sizeof(line))) != -1)
+	{
+		printf("Retrieved line of length %d :\n", read_length);
+		printf("%s", line);
+		printf("\n");
 	}
 
-	linecapacity = getline(lineptr, n, stream);
-	if (linecapacity == -1) {
-		return -1;
-	}
+	printf("Exited from program.\n");
 
-	newline = realloc(*lineptr, linecapacity + 1);
-	if (newline == NULL) {
-		return -1;
-	}
-
-	*lineptr = newline;
-	(*lineptr)[linecapacity] = '\0';
-
-	return linecapacity;
+	return (0);
 }

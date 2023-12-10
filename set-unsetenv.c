@@ -1,4 +1,27 @@
 #include "shell.h"
+/**
+ * split_command -  Function to split the command into words
+ * @command: commands
+ * @argc: argument count
+ *
+ * Return: argv
+ */
+
+char **split_command(char *command, int *argc)
+{
+	char **argv = malloc(100 * sizeof(char *));
+	char *token = strtok(command, " ");
+	*argc = 0;
+
+	while (token != NULL)
+	{
+		argv[*argc] = token;
+		(*argc)++;
+		token = strtok(NULL, " ");
+	}
+
+	return (argv);
+}
 
 /**
  * handle_setenv - handles environment inbuilt
