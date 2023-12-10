@@ -29,6 +29,8 @@ void read_command(char *command);
 void find_command(char *command);
 void execute_exit_command(char *command);
 void exit_shell(int status_code);
+void handle_setenv(char **tokens);
+void handle_unsetenv(char **tokens);
 int execute_command(char *command);
 int is_executable(char *filename);
 extern void exiting();
