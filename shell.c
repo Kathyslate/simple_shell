@@ -46,13 +46,13 @@ void simple_shell(void)
 	}
 }
 /**
- * main - Entry point
+ * exec_shell- Executes the shell
  * @argc: argument count
  * @argv: arguments
  * Return: always return 0
  */
 
-int main(int argc, char *argv[])
+int exec_shell(int argc, char *argv[])
 {
 	(void)argc;
 	(void)argv;
