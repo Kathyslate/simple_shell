@@ -1,41 +1,23 @@
-/*
- * File: megnix_getline_main.c
- * Authors: Green Ebisine and Mercy Oyetunde
- */
 #include "megnix_getline.h"
 /**
  * main - Entry point
- *
- * Return: Succesful exit
+ * Return: always return 0
  */
+
 int main(void)
 {
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
+	char line[1000];
+	int read_length = 0;
 
-	printf("Enter string: ");
-	while ((read = _getline(&line, &len, stdin)) != -1)
+	while ((read_length = megnix_getline(line, sizeof(line))) != -1)
 	{
-		if (line[strlen(line) - 1] == '\n')
-		{
-			line[strlen(line) - 1] = '\0';
-		}
-		printf("\nGotten string = %s\n", line);
-		printf("Line length: %zu \n\n", strlen(line));
-		printf("Enter string: ");
+		printf("\nLine of length: %d \n", read_length);
+		printf("Gotten Line: %s \n\n", line);
 	}
-	if (read == -1)
+	if (read_length == -1)
 	{
-		printf("\nEOF encountered, exiting...\n");
+		printf("\n\nEOF encountered, exiting...\n");
 	}
-	if (ferror(stdin))
-	{
-		perror("getline");
-		free(line);
-		exit(EXIT_FAILURE);
-	}
-
-	free(line);
-	exit(EXIT_SUCCESS);
+	return (0);
 }
+

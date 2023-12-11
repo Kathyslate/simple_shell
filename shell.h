@@ -21,7 +21,6 @@
 #define PROMPT "$ "
 #define MAX_TOKENS 1024
 #define BUFFER_SIZE 1024
-#define MAX_LINE_LENGTH 80
 
 ssize_t _readline(char **lineptr, size_t *n, FILE *stream);
 void simple_shell(void);

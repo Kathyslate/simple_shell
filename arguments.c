@@ -84,9 +84,9 @@ int execute_command(char *command)
  */
 int main(int argc, char *argv[])
 {
+	char command[MAX_LINE_LENGTH];
 	(void)argc;
 	(void)argv;
-	char command[MAX_LINE_LENGTH];
 
 	while (1)
 	{
