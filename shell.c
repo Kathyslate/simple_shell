@@ -23,6 +23,10 @@ int main(void)
 		fflush(stdout);
 		read_command(command);
 
+		if (strcmp(command, "exit") == 0)
+                {
+                        break;
+                }
 		if (strncmp(command, "exit", 4) == 0)
 		{
 			execute_exit_command(command);
