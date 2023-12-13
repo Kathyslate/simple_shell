@@ -7,21 +7,6 @@
 #include "shell.h"
 
 
-
-/**
- * exit_handler - executes command from standard input
- * @signum: arguments
- */
-
-void exit_handler(int signum)
-{
-	printf("Caught signal %d. Exiting...\n", signum);
-	exit(0);
-}
-
-
-
-
 /**
  * execute_command - executes command from standard input
  * @command: arguments

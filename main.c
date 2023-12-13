@@ -12,8 +12,7 @@ int main(void)
 
 	if(strcmp(command, "exit") == 0)
 	{
-            exiting();
-	    break;
+            exit(0);
         }
 	if (strncmp(command, "exit", 4) == 0)
                 {
