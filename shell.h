@@ -31,6 +31,8 @@ void env_builtin(int argc);
 int execute_command(char *command);
 void execute_exit_command(char *command);
 void read_command(char *command);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+ssize_t read_line(char *bufptr, size_t size, FILE *stream);
 
 
 #endif

@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "shell.h"
 
 
@@ -16,27 +10,47 @@ int main(void)
 {
 	char command[MAX_LINE_LENGTH];
 
+	char *lineptr = NULL;
+	size_t n = 0;
+	FILE *stream = stdin;
+	int read;
 
 	while (1)
 	{
 		printf("megnix> ");
 		fflush(stdout);
+
 		read_command(command);
+		read = _getline(&lineptr, &n, stream);
+
+		if (read == -1)
+		{
+			if (feof(stream))
+			{
+				break;
+			}
+			else
+			{
+				perror("Error reading input");
+				exit(1);
+			}
+		}
 
 		if (strncmp(command, "exit", 4) == 0)
 		{
 			execute_exit_command(command);
 			break;
 		}
-			if (execute_command(command) != 0)
-			{
-				break;
-			}
+		else
+		{
+			execute_command(command);
+		}
 	}
+
+	free(lineptr);
 
 	return (0);
 }
-
 
 
 /**
