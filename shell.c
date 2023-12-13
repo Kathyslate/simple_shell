@@ -12,7 +12,7 @@
  * Return: always return 0
  */
 
-int main(void)
+int status(void)
 {
 	char command[MAX_LINE_LENGTH];
 
@@ -25,10 +25,6 @@ int main(void)
 		fflush(stdout);
 		read_command(command);
 
-		if (strcmp(command, "exit") == 0)
-		{
-			exit_handler(0);
-		}
 		if (strncmp(command, "exit", 4) == 0)
 		{
 			execute_exit_command(command);

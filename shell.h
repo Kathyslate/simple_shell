@@ -24,6 +24,8 @@
 #define MAX_TOKENS 1024
 #define BUFFER_SIZE 1024
 
+int status(void);
+int exiting(void);
 void exit_handler(int signum);
 int is_executable(char *filename);
 void find_command(char *command);
