@@ -42,11 +42,11 @@ void execute_exit_command(char *command)
 
 int is_executable(char *filename)
 {
-        if (access(filename, X_OK) == 0)
-        {
-                return (1);
-        }
-        return (0);
+	if (access(filename, X_OK) == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 /**
@@ -58,12 +58,12 @@ int is_executable(char *filename)
 
 void read_command(char *command)
 {
-        char c;
-        int i = 0;
+	char c;
+	int i = 0;
 
-        while ((c = getchar()) != '\n' && c != EOF)
-        {
-                command[i++] = c;
-        }
-        command[i] = '\0';
+	while ((c = getchar()) != '\n' && c != EOF)
+	{
+		command[i++] = c;
+	}
+	command[i] = '\0';
 }

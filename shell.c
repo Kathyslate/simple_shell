@@ -41,7 +41,7 @@ int main(void)
 
 /**
  * execute_command - executes command from standard input
- * @argv: arguments
+ * @command: arguments
  * Return: always return 0
  */
 
@@ -70,7 +70,7 @@ int execute_command(char *command)
 		argv[i] = NULL;
 
 		if (execvp(argv[0], argv) == -1)
-		{    
+		{
 			perror("Error executing command");
 			exit(1);
 		}

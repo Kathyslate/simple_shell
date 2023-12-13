@@ -1,16 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 /**
- * add - adds 2 integers
- * @a: first integer
- * @b: second integer
- *
- * Description: 'a program that accepts two integers and sum them up'
+ * main - arrays
  *
  * Return: Always 0 (Success)
  */
 
-int add(int a, int b)
+int main(void)
 {
-	return (a + b);
+	int num1 = 0;
+	int num2 = 0;
+
+	printf("Enter the first integer: ");
+	scanf("%d", &num1);
+	printf("Enter the second integer: ");
+	scanf("%d", &num2);
+
+	int sum = num1 + num2;
+
+	printf("The sum of %d and %d is %d.\n", num1, num2, sum);
+
+	return (0);
 }
