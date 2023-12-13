@@ -16,6 +16,8 @@ int main(void)
 {
 	char command[MAX_LINE_LENGTH];
 
+	signal(SIGINT, exit_handler);
+
 
 	while (1)
 	{
@@ -24,9 +26,10 @@ int main(void)
 		read_command(command);
 
 		if (strcmp(command, "exit") == 0)
-                {
-                        break;
-                }
+		{
+			exit_handler(0);
+			break;
+		}
 		if (strncmp(command, "exit", 4) == 0)
 		{
 			execute_exit_command(command);
@@ -40,6 +43,18 @@ int main(void)
 
 	return (0);
 }
+
+/**
+ * exit_handler - executes command from standard input
+ * @signum: arguments
+ */
+
+void exit_handler(int signum)
+{
+	printf("Caught signal %d. Exiting...\n", signum);
+	exit(0);
+}
+
 
 
 

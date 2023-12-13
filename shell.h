@@ -3,6 +3,7 @@
 #define _GNU_SOURCE
 
 
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -23,6 +24,7 @@
 #define MAX_TOKENS 1024
 #define BUFFER_SIZE 1024
 
+void exit_handler(int signum);
 int is_executable(char *filename);
 void find_command(char *command);
 extern char **environ;
