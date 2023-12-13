@@ -38,4 +38,7 @@ int execute_command(char *command);
 void execute_exit_command(char *command);
 void read_command(char *command);
 
+
+int megnix_getline(char buffer[], int max_length);
+int my_getline(char buffer[], int max_length);
 #endif

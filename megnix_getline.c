@@ -1,4 +1,4 @@
-#include "megnix_getline.h"
+#include "shell.h"
 /**
  * megnix_getline - Read a line from the user into a buffer.
  *
@@ -24,3 +24,31 @@ int megnix_getline(char buffer[], int max_length)
 	return ((c == EOF && count == 0) ? -1 : count);
 }
 
+/**
+ * my_getline - Read a line from the user into a buffer.
+ *
+ * Return: String the line read, or an empty string if an error occurred
+ */
+
+#define MAX_LENGTH 1024
+
+int my_getline(char *buffer, int max_length)
+{
+	int length = 0;
+	char ch;
+
+	while (1)
+	{
+		ch = getchar();
+		if (ch == '\n' || ch == EOF)
+		{
+			break;
+		}
+		if (length < max_length - 1)
+		{
+			buffer[length++] = ch;
+		}
+	}
+	buffer[length] = '\0';
+	return (length);
+}

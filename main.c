@@ -2,13 +2,15 @@
 
 /**
  * main - Entry point
+ * @argv: vector
+ * @argc: count
  * Return: always return 0
  */
 
 int main(int argc, char *argv[])
 {
-	char **env_var;
 	char command[MAX_LINE_LENGTH];
+	(void)argc;
 
 	while (1)
 	{
@@ -21,7 +23,7 @@ int main(int argc, char *argv[])
 			printf("exiting\n");
 			exit(0);
 		}
-		else if (strncmp(command, "exit", 4) == 0)
+		if (strncmp(command, "exit", 4) == 0)
 		{
 			execute_exit_command(command);
 			return (1);
@@ -31,17 +33,6 @@ int main(int argc, char *argv[])
 			break;
 		}
 	}
-	for (env_var = environ; *env_var != NULL; env_var++)
-	{
-		printf("%s\n", *env_var);
-	}
-
-	if (argc < 2)
-	{
-		printf("Usage: %s <command>\n", argv[0]);
-		exit(1);
-	}
-
 	find_command(argv[1]);
 	return (0);
 }
