@@ -7,37 +7,6 @@
 #include "shell.h"
 
 
-/**
- * main - Entry point
- * Return: always return 0
- */
-
-int status(void)
-{
-	char command[MAX_LINE_LENGTH];
-
-	signal(SIGINT, exit_handler);
-
-
-	while (1)
-	{
-		printf("megnix> ");
-		fflush(stdout);
-		read_command(command);
-
-		if (strncmp(command, "exit", 4) == 0)
-		{
-			execute_exit_command(command);
-			break;
-		}
-		if (execute_command(command) != 0)
-		{
-			break;
-		}
-	}
-
-	return (0);
-}
 
 /**
  * exit_handler - executes command from standard input
