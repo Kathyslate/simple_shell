@@ -22,7 +22,6 @@
 #define PROMPT "$ "
 #define MAX_TOKENS 1024
 #define BUFFER_SIZE 1024
-#define MAX_LINE_LENGTH 80
 
 int is_executable(char *filename);
 void find_command(char *command);
