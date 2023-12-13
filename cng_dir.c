@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "shell.h"
 
 /**
  * builtin_cd - Entry point
@@ -11,6 +12,8 @@
 
 int builtin_cd(char **args)
 {
+	char cwd[1024];
+
 	if (args[1] == NULL)
 	{
 		char *home_dir = getenv("HOME");
@@ -38,9 +41,6 @@ int builtin_cd(char **args)
 			return (1);
 		}
 	}
-
-	char cwd[1024];
-
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
 		perror("Error: Could not get current working directory");
