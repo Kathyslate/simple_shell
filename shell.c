@@ -48,6 +48,7 @@ int main(void)
 
 int execute_command(char *command)
 {
+	pid_t pid;
 	char *argv[100];
 	int argc = 0;
 	char *token = strtok(command, " ");
@@ -60,7 +61,7 @@ int execute_command(char *command)
 
 	argv[argc] = NULL;
 
-	pid_t pid = fork();
+	pid = fork();
 
 	if (pid == 0)
 	{
@@ -85,6 +86,7 @@ int execute_command(char *command)
 	{
 		perror("Fork failed");
 	}
+	return (0);
 }
 
 /**
