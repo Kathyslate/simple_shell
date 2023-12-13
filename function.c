@@ -8,6 +8,7 @@
 
 void exit_shell(int status_code)
 {
+	printf("Exit shell with status code: %d\n", status_code);
 	exit(status_code);
 }
 

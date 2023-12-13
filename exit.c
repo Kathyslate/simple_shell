@@ -4,11 +4,10 @@
 #include <string.h>
 #include "shell.h"
 
+
 int exiting(void)
 {
         char command[MAX_LINE_LENGTH];
-
-        signal(SIGINT, exit_handler);
 
 
         while (1)

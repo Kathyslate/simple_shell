@@ -26,6 +26,7 @@
 
 int status(void);
 int exiting(void);
+void exit_shell(int status_code);
 void exit_handler(int signum);
 int is_executable(char *filename);
 void find_command(char *command);
