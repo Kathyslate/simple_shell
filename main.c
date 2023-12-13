@@ -15,6 +15,11 @@ int main(void)
 			printf("exiting\n");
                         exit(0);
                 }
+		else if (strncmp(command, "exit", 4) == 0)
+                {
+                        execute_exit_command(command);
+                        return (1);
+                }
 		if (execute_command(command) != 0)
                 {
                         break;
