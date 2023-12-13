@@ -3,10 +3,11 @@
 /**
  * main - Entry point
  * Return: always return 0
-*/
+ */
 
-int main(void)
+int main(int argc, char *argv[])
 {
+	char **env_var;
 	char command[MAX_LINE_LENGTH];
 
 	while (1)
@@ -30,7 +31,18 @@ int main(void)
 			break;
 		}
 	}
-	simple_shell();
+	for (env_var = environ; *env_var != NULL; env_var++)
+	{
+		printf("%s\n", *env_var);
+	}
+
+	if (argc < 2)
+	{
+		printf("Usage: %s <command>\n", argv[0]);
+		exit(1);
+	}
+
+	find_command(argv[1]);
 	return (0);
 }
 

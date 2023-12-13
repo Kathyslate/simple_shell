@@ -38,5 +38,4 @@ int execute_command(char *command);
 void execute_exit_command(char *command);
 void read_command(char *command);
 
-
 #endif
