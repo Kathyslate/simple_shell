@@ -17,7 +17,7 @@ void simple_shell(void)
 
 	while (1)
 	{
-		printf("megnix> ");
+		printf("megg ");
 		fgets(input, 1024, stdin);
 
 		if (feof(stdin))

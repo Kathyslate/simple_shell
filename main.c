@@ -25,6 +25,7 @@ int main(void)
                         break;
                 }
 	}
+	simple_shell();
 	return (0);
 }
 
