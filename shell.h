@@ -24,7 +24,7 @@
 #define MAX_TOKENS 1024
 #define BUFFER_SIZE 1024
 
-int status(void);
+int exit_stat(void);
 int exiting(void);
 void exit_shell(int status_code);
 void exit_handler(int signum);

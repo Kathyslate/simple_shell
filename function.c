@@ -27,10 +27,6 @@ void execute_exit_command(char *command)
 	{
 		exit_shell(status_code);
 	}
-	else
-	{
-		exit_shell(0);
-	}
 }
 
 /**
