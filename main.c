@@ -35,12 +35,8 @@ int main(void)
 	{
 		while (1)
 		{
-			find_command(command);
-
-			if (execute_command(command) != 0)
-			{
-				break;
-			}
+			read_command(command);
+			execute_command(command);
 			break;
 		}
 	}
