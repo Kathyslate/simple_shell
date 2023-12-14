@@ -24,7 +24,7 @@ int main(void)
 			if (strncmp(command, "exit", 4) == 0)
 			{
 				execute_exit_command(command);
-				return (1);
+				return(1);
 			}
 			if (execute_command(command) != 0)
 			{
@@ -40,5 +40,6 @@ int main(void)
 			break;
 		}
 	}
-return (0);
+	return (0);
 }
+

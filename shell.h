@@ -37,6 +37,7 @@ void env_builtin(int argc);
 int execute_command(char *command);
 void execute_exit_command(char *command);
 void read_command(char *command);
+int exiter(void);
 
 
 int megnix_getline(char buffer[], int max_length);
