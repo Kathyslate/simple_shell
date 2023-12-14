@@ -35,15 +35,16 @@ int main(void)
 	{
 		while (1)
 		{
+			printf("megnix> ");
+			fflush(stdout);
 			read_command(command);
 
 			if (execute_command(command) == 0)
-                        {
-                                break;
-                        }
+			{
+				break;
+			}
 		}
 	}
-	simple_shell();
 	return (0);
 }
 
