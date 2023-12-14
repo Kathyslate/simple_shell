@@ -32,6 +32,7 @@ int main(void)
 				break;
 			}
 		}
+		find_command(command);
 	} else
 	{
 		while (1)
@@ -42,7 +43,6 @@ int main(void)
 			{
 				break;
 			}
-
 			break;
 		}
 	}
