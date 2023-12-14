@@ -24,7 +24,7 @@ int main(void)
 			if (strncmp(command, "exit", 4) == 0)
 			{
 				execute_exit_command(command);
-				return(1);
+				return (1);
 			}
 			if (execute_command(command) != 0)
 			{
@@ -36,8 +36,11 @@ int main(void)
 		while (1)
 		{
 			read_command(command);
-			execute_command(command);
-			break;
+
+			if (execute_command(command) == 0)
+                        {
+                                break;
+                        }
 		}
 	}
 	return (0);
