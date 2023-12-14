@@ -96,7 +96,6 @@ void find_command(char *command)
 
 		if (access(cmd_path, X_OK) == 0)
 		{
-			printf("The command '%s' exists at: %s\n", command, cmd_path);
 			return;
 		}
 

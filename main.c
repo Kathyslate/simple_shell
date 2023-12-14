@@ -19,7 +19,6 @@ int main(void)
 
 			if (strcmp(command, "exit") == 0)
 			{
-				printf("exiting\n");
 				exit(0);
 			}
 			if (strncmp(command, "exit", 4) == 0)
@@ -32,7 +31,6 @@ int main(void)
 				break;
 			}
 		}
-		find_command(command);
 	} else
 	{
 		while (1)
