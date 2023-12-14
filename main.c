@@ -43,6 +43,7 @@ int main(void)
                         }
 		}
 	}
+	simple_shell();
 	return (0);
 }
 
