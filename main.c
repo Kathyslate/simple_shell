@@ -35,7 +35,7 @@ int main(void)
 	{
 		while (1)
 		{
-			read_command(command);
+			find_command(command);
 
 			if (execute_command(command) != 0)
 			{
