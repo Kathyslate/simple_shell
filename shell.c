@@ -63,41 +63,45 @@ int execute_command(char *command)
  *
  * Return: always returns 0
  */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 void find_command(char *command)
 {
-	char *path;
-	char *path_ptr;
-	char *cmd_ptr;
-	char *pathvar;
-	char cmd_path[1024];
+        char *path;
+        char *path_ptr;
+        char *cmd_ptr;
+        char *pathvar;
+        char cmd_path[1024];
 
-	pathvar = getenv("PATH");
+        pathvar = getenv("PATH");
 
-	if (!pathvar)
-	{
-		printf("The PATH environment variable is not set.\n");
-		return;
-	}
+        if (!pathvar)
+        {
+                printf("The PATH environment variable is not set.\n");
+                return;
+        }
 
-	path = strdup(pathvar);
-	path_ptr = strtok(path, ":");
+        path = strdup(pathvar);
+        path_ptr = strtok(path, ":");
 
-	while (path_ptr)
-	{
-		cmd_ptr = strtok(NULL, ":");
-		strcpy(cmd_path, path_ptr);
-		strcat(cmd_path, "/");
-		strcat(cmd_path, command);
+        while (path_ptr)
+        {
+                cmd_ptr = strtok(NULL, ":");
+                strcpy(cmd_path, path_ptr);
+                strcat(cmd_path, "/");
+                strcat(cmd_path, command);
 
-		if (is_executable(cmd_path))
-		{
-			printf("The command '%s' exists at: %s\n", command, cmd_path);
-			return;
-		}
+                if (access(cmd_path, X_OK) == 0)
+                {
+                        printf("The command '%s' exists at: %s\n", command, cmd_path);
+                        return;
+                }
 
-		path_ptr = cmd_ptr;
-	}
+                path_ptr = cmd_ptr;
+        }
 
-	printf("The command '%s' does not exist.\n", command);
+        printf("The command '%s' does not exist.\n", command);
 }
