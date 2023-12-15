@@ -17,10 +17,6 @@ int main(void)
 			fflush(stdout);
 			read_command(command);
 
-			if (strcmp(command, "exit") == 0)
-			{
-				exit(0);
-			}
 			if (strncmp(command, "exit", 4) == 0)
 			{
 				execute_exit_command(command);
@@ -36,8 +32,16 @@ int main(void)
 		while (1)
 		{
 			read_command(command);
-			execute_command(command);
-			break;
+
+			if (strncmp(command, "exit", 4) == 0)
+			{
+				execute_exit_command(command);
+				return (1);
+			}
+			if (execute_command(command) == 0)
+			{
+				break;
+			}
 		}
 	}
 	return (0);
