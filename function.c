@@ -55,7 +55,6 @@ int is_executable(char *filename)
  *
  * Return: always returns 0
  */
-
 void read_command(char *command)
 {
 	char c;

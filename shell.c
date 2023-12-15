@@ -10,48 +10,25 @@ int main(void)
 {
 	char command[MAX_LINE_LENGTH];
 
-	char *lineptr = NULL;
-	size_t n = 0;
-	FILE *stream = stdin;
-	int read;
-
 	while (1)
 	{
 		printf("megnix> ");
 		fflush(stdout);
-
 		read_command(command);
-		read = _getline(&lineptr, &n, stream);
-
-		if (read == -1)
-		{
-			if (feof(stream))
-			{
-				break;
-			}
-			else
-			{
-				perror("Error reading input");
-				exit(1);
-			}
-		}
 
 		if (strncmp(command, "exit", 4) == 0)
 		{
 			execute_exit_command(command);
 			break;
 		}
-		else
+		if (execute_command(command) != 0)
 		{
-			execute_command(command);
+			break;
 		}
 	}
 
-	free(lineptr);
-
 	return (0);
 }
-
 
 /**
  * execute_command - executes command from standard input
@@ -59,47 +36,50 @@ int main(void)
  * Return: always return 0
  */
 
+
 int execute_command(char *command)
 {
-	char *argv[MAX_LINE_LENGTH / 2 + 1];
-	char *token = strtok(command, " ");
-	int status;
-	int i = 0;
 	pid_t pid;
+	char *argv[100];
+	int argc = 0;
+	char *token = strtok(command, " ");
+
+	while (token != NULL)
+	{
+		argv[argc++] = token;
+		token = strtok(NULL, " ");
+	}
+
+	argv[argc] = NULL;
 
 	pid = fork();
 
-	if (pid == -1)
-	{
-		perror("Fork failed");
-		return (1);
-	}
 	if (pid == 0)
 	{
-		while (token != NULL)
-		{
-			argv[i++] = token;
-			token = strtok(NULL, " ");
-		}
-		argv[i] = NULL;
-
 		if (execvp(argv[0], argv) == -1)
 		{
-			perror("Error executing command");
+			if (errno == ENOENT)
+			{
+				printf("Command not found.\n");
+			} else
+			{
+				printf("An error occurred.\n");
+			}
+
 			exit(1);
 		}
-	}
-	else
+	} else if (pid > 0)
 	{
-		if (waitpid(pid, &status, 0) == -1)
-		{
-			perror("Error waiting for child process");
-			return (1);
-		}
-	}
+		int status;
 
+		waitpid(pid, &status, 0);
+	} else
+	{
+		perror("Fork failed");
+	}
 	return (0);
 }
+
 /**
  * find_command - executes command from standard input
  * @command: command arguments
