@@ -33,26 +33,27 @@ int execute_command(char *command)
 
 	if (pid == 0)
 	{
-		if (execvp(argv[0], argv) == -1)
-		{
-			if (errno == ENOENT)
-			{
-				printf("Command not found.\n");
-			} else
-			{
-				printf("An error occurred.\n");
-			}
+                if (execvp(argv[0], argv) == -1)
+                {
+                        if (errno == ENOENT)
+                        {
+                                printf("Command not found.\n");
+                        } else
+                        {
+                                printf("An error occurred.\n");
+                        }
 
-			exit(1);
-		}
+                        exit(1);
+                }
 	} else if (pid > 0)
 	{
 		int status;
 
-		waitpid(pid, &status, 0);
+                waitpid(pid, &status, 0);
 	} else
 	{
 		perror("Fork failed");
+            return -1;
 	}
 	return (0);
 }
