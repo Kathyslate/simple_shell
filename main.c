@@ -42,7 +42,10 @@ int main(void)
 			{
 				break;
 			}
-			break;
+			if (execute_command(command) != 0)
+                        {
+                                break;
+                        }
 		}
 	}
 	return (0);
