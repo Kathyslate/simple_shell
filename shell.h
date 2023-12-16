@@ -25,6 +25,7 @@
 #define MAX_TOKENS 1024
 #define BUFFER_SIZE 1024
 
+int status;
 void simple_shell(void);
 int exit1(void);
 int setenv_builtin(const char *name, const char *value, int overwrite);
@@ -39,10 +40,11 @@ void find_command(char *command);
 extern char **environ;
 int builtin_cd(char **args);
 void env_builtin(int argc);
-int execute_command(char *command);
+void execute_command(char *command);
 void execute_exit_command(char *command);
 void read_command(char *command);
 int exiter(void);
+char command[MAX_LINE_LENGTH];
 
 
 int megnix_getline(char buffer[], int max_length);

@@ -7,8 +7,6 @@
 
 int main(void)
 {
-	char command[MAX_LINE_LENGTH];
-
 	if (isatty(STDIN_FILENO))
 	{
 		while (1)
@@ -26,10 +24,7 @@ int main(void)
 				execute_exit_command(command);
 				return (1);
 			}
-			if (execute_command(command) != 0)
-			{
-				break;
-			}
+			execute_command(command);
 
 		}
 	} else

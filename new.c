@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include "shell.h"
+
+void execute_command(char *command)
+{
+    char *arguments[10];
+    int num_args = 0;
+    pid_t pid;
+    int status;
+
+    command = strtok(command, " \n");
+    arguments[num_args++] = command;
+
+    while ((arguments[num_args++] = strtok(NULL, " \n")) != NULL)
+        ;
+
+    pid = fork();
+    if (pid == 0) {
+        execvp(command, arguments);
+        perror("execvp");
+        exit(1);
+    } else if (pid < 0) {
+        perror("fork");
+        exit(1);
+    } else {
+        if (waitpid(pid, &status, 0) == -1) {
+            perror("waitpid");
+        }
+    }
+}
