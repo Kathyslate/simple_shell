@@ -33,11 +33,15 @@ int main(void)
 		{
 			read_command(command);
 
-			if (strncmp(command, "exit", 4) == 0)
-			{
-				execute_exit_command(command);
-			}
-			execute_command(command);
+			 if(strcmp(command, "exit") == 0)
+                        {
+                                exit(0);
+                        }
+                        if (strncmp(command, "exit", 4) == 0)
+                        {
+                                execute_exit_command(command);
+                        }
+                        execute_command(command);
 			break;
 		}
 	}
