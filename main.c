@@ -1,28 +1,47 @@
 #include "shell.h"
 
+/**
+ * main - Entry point
+ * Return: always return 0
+ */
 
-int main(int argc, char *argv[])
+int main(void)
 {
-    FILE *input_file;
-    char *filename = argv[1];
-	char input[1024];
+	if (isatty(STDIN_FILENO))
+	{
+		while (1)
+		{
+			printf("megnix> ");
+			fflush(stdout);
+			read_command(command);
 
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <input_file>\n", argv[0]);
-        exit(1);
-    }
+			if(strcmp(command, "exit") == 0)
+			{
+				exit(0);
+			}
+			if (strncmp(command, "exit", 4) == 0)
+			{
+				execute_exit_command(command);
+				return (1);
+			}
+			execute_command(command);
 
-    input_file = fopen(filename, "r");
-    if (input_file == NULL) {
-	    fprintf(stderr, "./hsh: %d: Can't open %s\n", 0 , filename);
-        exit(127);
-    }
+		}
+	} else
+	{
+		while (1)
+		{
+			read_command(command);
 
-    while (fgets(input, sizeof(input), input_file) != NULL) {
-        execute_command(command);
-    }
-
-    fclose(input_file);
-
-    return 0;
+			if (strncmp(command, "exit", 4) == 0)
+			{
+				execute_exit_command(command);
+				return (1);
+			}
+			execute_command(command);
+			break;
+		}
+	}
+	return (0);
 }
+
