@@ -22,9 +22,14 @@ void execute_exit_command(char *command)
 {
 	int status_code;
 
-	if (sscanf(command, "exit %d", &status_code) == 1 && status_code >= 1)
+	if (sscanf(command, "exit %d", &status_code) == 1)
 	{
 		exit_shell(status_code);
+	}
+	if (status_code >= 0)
+	{
+		 fprintf(stderr, "./hsh: %d: exit : illegal number: %d\n", 1 , status_code);
+		 exit(2);
 	}
 }
 
