@@ -40,7 +40,7 @@ void find_command(char *command);
 extern char **environ;
 int builtin_cd(char **args);
 void env_builtin(int argc);
-void execute_command(char *command);
+int execute_command(char *command);
 void execute_exit_command(char *command);
 void read_command(char *command);
 int exiter(void);

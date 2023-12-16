@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 #include "shell.h"
 
-void execute_command(char *command)
+int execute_command(char *command)
 {
     char *arguments[10];
     int num_args = 0;
@@ -32,6 +32,7 @@ void execute_command(char *command)
             perror("waitpid");
         }
     }
+    return (0);
 }
 
 
