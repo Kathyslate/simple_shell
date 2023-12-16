@@ -5,7 +5,7 @@
  * Return: always return 0
  */
 
-int main(int argc, char *argv[])
+int main(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
@@ -36,12 +36,8 @@ int main(int argc, char *argv[])
 			if (strncmp(command, "exit", 4) == 0)
 			{
 				execute_exit_command(command);
-				return (1);
 			}
 			execute_command(command);
-			set(argc, argv);
-			unset(argc, argv);
-			builtin_cd(argv);
 			break;
 		}
 	}
