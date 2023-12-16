@@ -48,7 +48,10 @@ int main(void)
 				execute_exit_command(command);
 				return (1);
 			}
-			execute_command(command);
+			if (execute_command(command) != 0)
+                        {
+                                break;
+                        }
 			break;
 		}
 	}
