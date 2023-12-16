@@ -33,3 +33,26 @@ void execute_command(char *command)
         }
     }
 }
+
+
+
+int inputedd(int argc, char *argv[])
+{
+    FILE *input_file;
+    char input[1024];
+    (void)argc;
+
+    input_file = fopen(argv[1], "r");
+    if (input_file == NULL) {
+        perror("fopen");
+        exit(1);
+    }
+
+    while (fgets(input, sizeof(input), input_file) != NULL) {
+        execute_command(command);
+    }
+
+    fclose(input_file);
+
+    return 0;
+}
