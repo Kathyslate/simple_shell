@@ -35,7 +35,7 @@ int main(void)
 
 			 if(strcmp(command, "exit") == 0)
                         {
-                                exit(0);
+                                exit(status);
                         }
                         if (strncmp(command, "exit", 4) == 0)
                         {

@@ -28,7 +28,7 @@ void execute_exit_command(char *command)
 	}
 	else if (status_code < 0)
 	{
-		 fprintf(stderr, "./hsh: %d: exit : illegal number: %d\n", 1 , status_code);
+		 fprintf(stderr, "./hsh: %d: exit: Illegal number: %d\n", 1 , status_code);
 		 exit(2);
 	}
 }
