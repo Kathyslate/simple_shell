@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     input_file = fopen(filename, "r");
     if (input_file == NULL) {
 	    fprintf(stderr, "./hsh: %d: Can't open %s\n", errno, filename);
-        exit(127);
+        exit(0);
     }
 
     while (fgets(input, sizeof(input), input_file) != NULL) {
