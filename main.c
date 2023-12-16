@@ -17,12 +17,20 @@ int main(void)
 			fflush(stdout);
 			read_command(command);
 
+			if(strcmp(command, "exit") == 0)
+			{
+				exit(0);
+			}
 			if (strncmp(command, "exit", 4) == 0)
 			{
 				execute_exit_command(command);
 				return (1);
 			}
-			execute_command(command);
+			if (execute_command(command) != 0)
+			{
+				break;
+			}
+
 		}
 	} else
 	{
@@ -30,12 +38,20 @@ int main(void)
 		{
 			read_command(command);
 
+			if(strcmp(command, "exit") == 0)
+			{
+				exit(0);
+			}
 			if (strncmp(command, "exit", 4) == 0)
 			{
 				execute_exit_command(command);
 				return (1);
 			}
-			execute_command(command);
+			if (execute_command(command) == 0)
+			{
+				break;
+			}
+
 			break;
 		}
 	}
