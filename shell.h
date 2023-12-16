@@ -27,13 +27,17 @@
 
 void simple_shell(void);
 int exit1(void);
+int setenv_builtin(const char *name, const char *value, int overwrite);
+int unsetenv_builtin(const char *name);
+int set(int argc, char *argv[]);
+int unset(int argc, char *argv[]);
 int exit2(void);
 void exit_shell(int status_code);
 void exit_handler(int signum);
 int is_executable(char *filename);
 void find_command(char *command);
 extern char **environ;
-void cd_builtin(int argc, char *argv[]);
+int builtin_cd(char **args);
 void env_builtin(int argc);
 int execute_command(char *argv[]);
 void execute_exit_command(char *command);

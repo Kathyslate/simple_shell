@@ -49,7 +49,7 @@ int main(void)
 				execute_exit_command(command);
 				return (1);
 			}
-			if (execute_command(argv) != 0)
+			if (execute_command(argv) == 0)
                         {
                                 break;
                         }
