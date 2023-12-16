@@ -23,16 +23,16 @@ int execute_command(char *command)
     if (pid == 0) {
         execvp(command, arguments);
         perror("execvp");
-        exit(1);
+        exit(2);
     } else if (pid < 0) {
         perror("fork");
-        exit(1);
+        exit(2);
     } else {
         if (waitpid(pid, &status, 0) == -1) {
             perror("waitpid");
         }
     }
-    return (0);
+    return (status);
 }
 
 

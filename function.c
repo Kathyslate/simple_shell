@@ -20,6 +20,7 @@ void exit_shell(int status_code)
 
 void execute_exit_command(char *command)
 {
+	char string;
 	int status_code;
 
 	if ((sscanf(command, "exit %d", &status_code) == 1) && status_code >= 0)
@@ -28,8 +29,13 @@ void execute_exit_command(char *command)
 	}
 	else if (status_code < 0)
 	{
-		 fprintf(stderr, "./hsh: %d: exit: Illegal number: %d\n", 1 , status_code);
-		 exit(2);
+		fprintf(stderr, "./hsh: %d: exit: Illegal number: %d\n", 1 , status_code);
+		exit(2);
+	}
+	else if (sscanf(command, "exit %s", &string) == 1)
+	{
+		fprintf(stderr, "./hsh: %d: exit: Illegal number: %s\n", 1 , &string);
+		exit(2);
 	}
 }
 

@@ -14,7 +14,7 @@
  */
 
 
-int execute_commandsss(char *command)
+int execute_commandsssssssss(char *command)
 {
 	pid_t pid;
 	int status;
