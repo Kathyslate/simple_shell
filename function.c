@@ -22,7 +22,7 @@ void execute_exit_command(char *command)
 {
 	int status_code;
 
-	if (sscanf(command, "exit %d", &status_code) == 1 && status_code >= 0)
+	if (sscanf(command, "exit %d", &status_code) == 1 && status_code >= 1)
 	{
 		exit_shell(status_code);
 	}
