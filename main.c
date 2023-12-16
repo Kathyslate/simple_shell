@@ -7,6 +7,7 @@
 
 int main(void)
 {
+	char *argv[100];
 	char command[MAX_LINE_LENGTH];
 
 	if (isatty(STDIN_FILENO))
@@ -26,7 +27,7 @@ int main(void)
 				execute_exit_command(command);
 				return (1);
 			}
-			if (execute_command(command) != 0)
+			if (execute_command(argv) != 0)
 			{
 				break;
 			}
@@ -48,7 +49,7 @@ int main(void)
 				execute_exit_command(command);
 				return (1);
 			}
-			if (execute_command(command) != 0)
+			if (execute_command(argv) != 0)
                         {
                                 break;
                         }

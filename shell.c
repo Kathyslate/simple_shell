@@ -14,12 +14,12 @@
  */
 
 
-int execute_command(char *command)
+int execute_command(char *argv[])
 {
 	pid_t pid;
 	int status;
-	char *argv[100];
 	int argc = 0;
+	 char command[MAX_LINE_LENGTH];
 	char *token = strtok(command, " ");
 
 	while (token != NULL)
@@ -53,8 +53,7 @@ int execute_command(char *command)
         return -1;
     }
 
-    return WEXITSTATUS(status);
-return (0);
+    return (WEXITSTATUS(status));
 }
 
 /**
