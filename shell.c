@@ -14,12 +14,12 @@
  */
 
 
-int execute_command(char *argv[])
+int execute_command(char *command)
 {
 	pid_t pid;
 	int status;
+	char *argv[100];
 	int argc = 0;
-	 char command[MAX_LINE_LENGTH];
 	char *token = strtok(command, " ");
 
 	while (token != NULL)
@@ -34,26 +34,26 @@ int execute_command(char *argv[])
 
 	if (pid == 0)
 	{
-		 if (execvp(argv[0], argv) == -1) {
-            if (errno == ENOENT) {
-                printf("Command not found.\n");
-            } else {
-                printf("An error occurred.\n");
-            }
+		if (execvp(argv[0], argv) == -1) {
+			if (errno == ENOENT) {
+				printf("Command not found.\n");
+			} else {
+				printf("An error occurred.\n");
+			}
 
-            _exit(EXIT_FAILURE);
-        }
-    } else if (pid > 0) {
-        if (waitpid(pid, &status, 0) == -1) {
-            perror("Waitpid failed");
-            return -1;
-        }
-    } else {
-        perror("Fork failed");
-        return -1;
-    }
+			exit(EXIT_FAILURE);
+		}
+	} else if (pid > 0) {
+		if (waitpid(pid, &status, 0) == -1) {
+			perror("Waitpid failed");
+			return -1;
+		}
+	} else {
+		perror("Fork failed");
+		return -1;
+	}
 
-    return (WEXITSTATUS(status));
+	return (0);
 }
 
 /**
