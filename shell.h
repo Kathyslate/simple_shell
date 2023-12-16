@@ -38,7 +38,7 @@ void exit_handler(int signum);
 int is_executable(char *filename);
 void find_command(char *command);
 extern char **environ;
-int builtin_cd(char **args);
+int builtin_cd(char **argv);
 void env_builtin(int argc);
 int execute_command(char *command);
 void execute_exit_command(char *command);

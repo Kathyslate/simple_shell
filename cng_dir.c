@@ -10,11 +10,11 @@
  */
 
 
-int builtin_cd(char **args)
+int builtin_cd(char **argv)
 {
 	char cwd[1024];
 
-	if (args[1] == NULL)
+	if (argv[1] == NULL)
 	{
 		char *home_dir = getenv("HOME");
 
@@ -28,14 +28,14 @@ int builtin_cd(char **args)
 			perror("Error: Could not change directory");
 			return (1);
 		}
-	} else if (strcmp(args[1], "-") == 0)
+	} else if (strcmp(argv[1], "-") == 0)
 	{
 		perror("Error: Unsupported operation");
 		return (1);
 	}
 	else
 	{
-		if (chdir(args[1]) != 0)
+		if (chdir(argv[1]) != 0)
 		{
 			perror("Error: Could not change directory");
 			return (1);

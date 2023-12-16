@@ -5,7 +5,7 @@
  * Return: always return 0
  */
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	if (isatty(STDIN_FILENO))
 	{
@@ -39,6 +39,9 @@ int main(void)
 				return (1);
 			}
 			execute_command(command);
+			set(argc, argv);
+			unset(argc, argv);
+			builtin_cd(argv);
 			break;
 		}
 	}
